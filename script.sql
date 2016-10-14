@@ -40,14 +40,16 @@ INSERT INTO dev_prj (developer_id, project_id)  VALUES (2,3);
 INSERT INTO dev_prj (developer_id, project_id)  VALUES (3,3);
 INSERT INTO dev_prj (developer_id, project_id)  VALUES (4,3);
 
-/* Вывести список проектов, в которых нет разработчиков*/
+/*Задача 1
+Вывести список проектов, в которых нет разработчиков*/
 SELECT  projects.name
 FROM projects
   LEFT JOIN dev_prj
     ON projects.project_id = dev_prj.project_id
 WHERE dev_prj_id IS NULL;
 
-/* Вывести список проектов, в которых участвуют все разработчики*/
+/*Задача 2 
+Вывести список проектов, в которых участвуют все разработчики*/
 SELECT projects.name
 FROM projects
 WHERE project_id=(
@@ -60,14 +62,11 @@ WHERE project_id=(
   )
 );
 
-/*ЗВывести список проектов (с указанием количества разработчиков), в которых принимает
+/*задача3 
+Вывести список проектов (с указанием количества разработчиков), в которых принимает
 участие четное количество разработчиков и этих разработчиков больше, чем двое.*/
 SELECT projects.name AS 'project',count(dev_prj.project_id) AS 'number of developers'
 FROM projects
   LEFT JOIN dev_prj
     ON projects.project_id = dev_prj.project_id
 GROUP BY dev_prj.project_id;
-
-
-
-
