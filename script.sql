@@ -65,8 +65,10 @@ WHERE project_id=(
 /*задача3 
 Вывести список проектов (с указанием количества разработчиков), в которых принимает
 участие четное количество разработчиков и этих разработчиков больше, чем двое.*/
-SELECT projects.name AS 'project',count(dev_prj.project_id) AS 'number of developers'
-FROM projects
-  LEFT JOIN dev_prj
-    ON projects.project_id = dev_prj.project_id
-GROUP BY dev_prj.project_id;
+SELECT * FROM (
+                SELECT projects.name AS 'project',count(dev_prj.project_id) AS 'number of developers'
+                FROM projects
+                  LEFT JOIN dev_prj
+                    ON projects.project_id = dev_prj.project_id
+                GROUP BY dev_prj.project_id) AS temp
+WHERE `number of developers` % 2=0 AND `number of developers` >2;
